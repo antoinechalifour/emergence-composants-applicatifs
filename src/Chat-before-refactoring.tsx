@@ -7,7 +7,7 @@ export const Chat = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!inputValue) return;
+    if (!inputValue.trim()) return;
 
     setMessages([...messages, inputValue]);
     setInputvalue("");

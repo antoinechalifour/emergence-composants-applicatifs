@@ -22,7 +22,7 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!inputValue) return;
+    if (!inputValue.trim()) return;
 
     onMessageAdded(inputValue);
     setInputvalue("");

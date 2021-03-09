@@ -13,7 +13,7 @@ describe("<Chat />", () => {
   it("affiche les messages par leur ordre d'envoi chronologique", () => {
     // Given
     const premierMessageEnvoyé = "Bonjour";
-    const deuxièmeMessageEnvoyé = "";
+    const deuxièmeMessageEnvoyé = "  ";
     const troisièmeMessageEnvoyé = "Comment allez-vous ?";
     render(<Chat />);
 
