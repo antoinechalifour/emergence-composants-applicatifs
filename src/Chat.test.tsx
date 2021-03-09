@@ -6,7 +6,7 @@ import { Chat } from "./Chat-after-refactoring";
 
 const zoneInput = () => screen.getByLabelText("Votre message");
 const submitButton = () => screen.getByRole("button", { name: "Envoyer" });
-const conversation = () => screen.queryAllByRole("listitem");
+const conversation = () => screen.queryAllByRole("listItem");
 const leMessage = (contenu: string) => screen.getByText(contenu);
 
 describe("<Chat />", () => {
@@ -29,9 +29,9 @@ describe("<Chat />", () => {
 
     // Then
     expect(leMessage(premierMessageEnvoyé)).toBeVisible();
+    expect(leMessage(deuxièmeMessageEnvoyé)).not.toBeVisible();
     expect(leMessage(troisièmeMessageEnvoyé)).toBeVisible();
 
-    expect(conversation()).toHaveLength(2)
     expect(conversation()[0]).toEqual(leMessage(premierMessageEnvoyé));
     expect(conversation()[1]).toEqual(leMessage(troisièmeMessageEnvoyé));
   });
