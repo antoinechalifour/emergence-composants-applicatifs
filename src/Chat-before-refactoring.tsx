@@ -15,7 +15,7 @@ export const Chat = () => {
 
   return (
     <main>
-      <ol>
+      <ol aria-label="Messages de la conversation">
         {messages.map((message) => (
           <li key={message}>{message}</li>
         ))}

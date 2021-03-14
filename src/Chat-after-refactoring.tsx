@@ -5,7 +5,7 @@ interface ConversationProps {
 }
 
 const Conversation = ({ messages }: ConversationProps) => (
-  <ol>
+  <ol aria-label='Messages de la conversation'>
     {messages.map((message) => (
       <li key={message}>{message}</li>
     ))}

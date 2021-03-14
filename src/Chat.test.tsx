@@ -1,4 +1,4 @@
-import { screen } from "@testing-library/dom";
+import { screen, within } from "@testing-library/dom";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
@@ -6,8 +6,10 @@ import { Chat } from "./Chat-after-refactoring";
 
 const zoneInput = () => screen.getByLabelText("Votre message");
 const submitButton = () => screen.getByRole("button", { name: "Envoyer" });
-const conversation = () => screen.queryAllByRole("listitem");
-const leMessage = (contenu: string) => screen.getByText(contenu);
+const laConversation = () =>
+  screen.getByRole("list", { name: "Messages de la conversation" });
+const leMessageALaPosition = (position: number) =>
+  within(laConversation()).getAllByRole("listitem")[position - 1];
 
 describe("<Chat />", () => {
   it("affiche les messages par leur ordre d'envoi chronologique", () => {
@@ -28,11 +30,12 @@ describe("<Chat />", () => {
     userEvent.click(submitButton());
 
     // Then
-    expect(leMessage(premierMessageEnvoyé)).toBeVisible();
-    expect(leMessage(troisièmeMessageEnvoyé)).toBeVisible();
-
-    expect(conversation()).toHaveLength(2)
-    expect(conversation()[0]).toEqual(leMessage(premierMessageEnvoyé));
-    expect(conversation()[1]).toEqual(leMessage(troisièmeMessageEnvoyé));
+    expect(laConversation().children).toHaveLength(2);
+    expect(leMessageALaPosition(1))
+      .toHaveTextContent(premierMessageEnvoyé)
+      .toBeVisible();
+    expect(leMessageALaPosition(2))
+      .toHaveTextContent(troisièmeMessageEnvoyé)
+      .toBeVisible();
   });
 });
