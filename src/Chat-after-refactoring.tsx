@@ -5,7 +5,7 @@ interface ConversationProps {
 }
 
 const Conversation = ({ messages }: ConversationProps) => (
-  <ol aria-label='Messages de la conversation'>
+  <ol aria-label="Messages de la conversation">
     {messages.map((message) => (
       <li key={message}>{message}</li>
     ))}
@@ -22,8 +22,6 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!inputValue.trim()) return;
-
     onMessageAdded(inputValue);
     setInputvalue("");
   };
@@ -34,6 +32,8 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
         id="votre-message"
         name="votre-message"
         type="text"
+        required
+        minLength={1}
         value={inputValue}
         onChange={(e) => setInputvalue(e.target.value)}
       />
@@ -44,10 +44,15 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   );
 };
 
+const isBlank = (message: string) => !message.trim();
+
 const useChatViewModel = () => {
   const [messages, setMessages] = useState<string[]>([]);
-  const addNewMessage = (message: string) =>
+  const addNewMessage = (message: string) => {
+    if (isBlank(message)) return;
+
     setMessages([...messages, message]);
+  };
 
   return { messages, addNewMessage };
 };

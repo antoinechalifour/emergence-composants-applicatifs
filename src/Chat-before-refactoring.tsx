@@ -27,6 +27,8 @@ export const Chat = () => {
           name="votre-message"
           type="text"
           value={inputValue}
+          required
+          minLength={1}
           onChange={(e) => setInputvalue(e.target.value)}
         />
         <label htmlFor="votre-message">Votre message</label>

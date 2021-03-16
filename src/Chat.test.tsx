@@ -17,6 +17,7 @@ describe("<Chat />", () => {
     const premierMessageEnvoyé = "Bonjour";
     const deuxièmeMessageEnvoyé = "  ";
     const troisièmeMessageEnvoyé = "Comment allez-vous ?";
+    const quatrièmeMessageEnvoyé = "";
     render(<Chat />);
 
     // When
@@ -27,6 +28,9 @@ describe("<Chat />", () => {
     userEvent.click(boutonEnvoyer());
 
     userEvent.type(zoneSaisie(), troisièmeMessageEnvoyé);
+    userEvent.click(boutonEnvoyer());
+
+    userEvent.type(zoneSaisie(), quatrièmeMessageEnvoyé);
     userEvent.click(boutonEnvoyer());
 
     // Then
