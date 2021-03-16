@@ -4,8 +4,8 @@ import userEvent from "@testing-library/user-event";
 
 import { Chat } from "./Chat-after-refactoring";
 
-const zoneInput = () => screen.getByLabelText("Votre message");
-const submitButton = () => screen.getByRole("button", { name: "Envoyer" });
+const zoneSaisie = () => screen.getByLabelText("Votre message");
+const boutonEnvoyer = () => screen.getByRole("button", { name: "Envoyer" });
 const laConversation = () =>
   screen.getByRole("list", { name: "Messages de la conversation" });
 const leMessageALaPosition = (position: number) =>
@@ -20,14 +20,14 @@ describe("<Chat />", () => {
     render(<Chat />);
 
     // When
-    userEvent.type(zoneInput(), premierMessageEnvoyé);
-    userEvent.click(submitButton());
+    userEvent.type(zoneSaisie(), premierMessageEnvoyé);
+    userEvent.click(boutonEnvoyer());
 
-    userEvent.type(zoneInput(), deuxièmeMessageEnvoyé);
-    userEvent.click(submitButton());
+    userEvent.type(zoneSaisie(), deuxièmeMessageEnvoyé);
+    userEvent.click(boutonEnvoyer());
 
-    userEvent.type(zoneInput(), troisièmeMessageEnvoyé);
-    userEvent.click(submitButton());
+    userEvent.type(zoneSaisie(), troisièmeMessageEnvoyé);
+    userEvent.click(boutonEnvoyer());
 
     // Then
     expect(laConversation().children).toHaveLength(2);
