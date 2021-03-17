@@ -46,7 +46,7 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
 
 const isBlank = (message: string) => !message.trim();
 
-const useChatViewModel = () => {
+const useChat = () => {
   const [messages, setMessages] = useState<string[]>([]);
   const addNewMessage = (message: string) => {
     if (isBlank(message)) return;
@@ -58,7 +58,7 @@ const useChatViewModel = () => {
 };
 
 export const Chat = () => {
-  const { messages, addNewMessage } = useChatViewModel();
+  const { messages, addNewMessage } = useChat();
 
   return (
     <main>
