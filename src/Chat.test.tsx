@@ -14,32 +14,26 @@ const leMessageALaPosition = (position: number) =>
 describe("<Chat />", () => {
   it("affiche les messages par leur ordre d'envoi chronologique", () => {
     // Given
-    const premierMessageEnvoyé = "Bonjour";
-    const deuxièmeMessageEnvoyé = "  ";
-    const troisièmeMessageEnvoyé = "Comment allez-vous ?";
-    const quatrièmeMessageEnvoyé = "";
     render(<Chat />);
 
     // When
-    userEvent.type(zoneSaisie(), premierMessageEnvoyé);
+    userEvent.type(zoneSaisie(), "Bonjour");
     userEvent.click(boutonEnvoyer());
 
-    userEvent.type(zoneSaisie(), deuxièmeMessageEnvoyé);
+    userEvent.type(zoneSaisie(), "  ");
     userEvent.click(boutonEnvoyer());
 
-    userEvent.type(zoneSaisie(), troisièmeMessageEnvoyé);
+    userEvent.type(zoneSaisie(), "Comment allez-vous ?");
     userEvent.click(boutonEnvoyer());
 
-    userEvent.type(zoneSaisie(), quatrièmeMessageEnvoyé);
+    userEvent.type(zoneSaisie(), "");
     userEvent.click(boutonEnvoyer());
 
     // Then
     expect(laConversation().children).toHaveLength(2);
-    expect(leMessageALaPosition(1))
-      .toHaveTextContent(premierMessageEnvoyé)
-      .toBeVisible();
+    expect(leMessageALaPosition(1)).toHaveTextContent("Bonjour").toBeVisible();
     expect(leMessageALaPosition(2))
-      .toHaveTextContent(troisièmeMessageEnvoyé)
+      .toHaveTextContent("Comment allez-vous ?")
       .toBeVisible();
   });
 });
