@@ -1,15 +1,22 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Message, Messagerie } from "./Model";
 
-export const Chat = () => {
-  const [messages, setMessages] = useState<string[]>([]);
+interface ChatProps {
+  messagerie: Messagerie;
+}
+
+export const Chat: React.FC<ChatProps> = ({ messagerie }) => {
+  const [messages, setMessages] = useState<Message[]>([]);
   const [inputValue, setInputvalue] = useState("");
+
+  useEffect(() => messagerie.onChange(setMessages), [messagerie]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!inputValue.trim()) return;
 
-    setMessages([...messages, inputValue]);
+    messagerie.envoyerMessage(inputValue);
     setInputvalue("");
   };
 
@@ -17,7 +24,7 @@ export const Chat = () => {
     <main>
       <ol aria-label="Messages de la conversation">
         {messages.map((message) => (
-          <li key={message}>{message}</li>
+          <li key={message.id}>{message.contenu}</li>
         ))}
       </ol>
 
