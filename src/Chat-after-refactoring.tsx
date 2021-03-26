@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { Message, Messagerie } from "./Model";
+
+/*
+Composant <Conversation /> qui affiche la liste des messages envoyés
+ */
 
 interface ConversationProps {
-  messages: string[];
+  messages: Message[];
 }
 
 const Conversation = ({ messages }: ConversationProps) => (
   <ol aria-label="Messages de la conversation">
     {messages.map((message) => (
-      <li key={message}>{message}</li>
+      <li key={message.id}>{message.contenu}</li>
     ))}
   </ol>
 );
+
+/*
+Composant <Rédaction /> qui permet la saisie de nouveaux messages
+ */
 
 interface RédactionProps {
   onMessageAdded: (message: string) => void;
@@ -44,21 +54,35 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   );
 };
 
+/*
+Viewmodel qui permet de binder les données à la vue
+ */
+
 const isBlank = (message: string) => !message.trim();
 
-const useChat = () => {
-  const [messages, setMessages] = useState<string[]>([]);
-  const addNewMessage = (message: string) => {
-    if (isBlank(message)) return;
+const useChat = (messagerie: Messagerie) => {
+  const [messages, setMessages] = useState<Message[]>([]);
+  const addNewMessage = (contenu: string) => {
+    if (isBlank(contenu)) return;
 
-    setMessages([...messages, message]);
+    messagerie.envoyerMessage(contenu);
   };
+
+  useEffect(() => messagerie.onChange(setMessages), [messagerie]);
 
   return { messages, addNewMessage };
 };
 
-export const Chat = () => {
-  const { messages, addNewMessage } = useChat();
+/*
+Composant <Chat />, API publique de notre application
+ */
+
+interface ChatProps {
+  messagerie: Messagerie;
+}
+
+export const Chat: React.FC<ChatProps> = ({ messagerie }) => {
+  const { messages, addNewMessage } = useChat(messagerie);
 
   return (
     <main>
