@@ -3,7 +3,7 @@ import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import { Chat } from "./Chat-after-refactoring";
-import { MessagerieFake } from "./MessagerieFake";
+import { MessagerieFake } from "../model/MessagerieFake";
 
 const zoneSaisie = () => screen.getByLabelText("Votre message");
 const boutonEnvoyer = () => screen.getByRole("button", { name: "Envoyer" });

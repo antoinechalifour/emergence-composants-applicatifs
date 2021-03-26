@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { Message, Messagerie } from "./Model";
+import { Messagerie } from "../model/Messagerie";
+import { Message } from "../model/Message";
 
 /*
 Composant <Conversation /> qui affiche la liste des messages envoyés

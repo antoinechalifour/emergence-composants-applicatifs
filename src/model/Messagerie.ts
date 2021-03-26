@@ -1,7 +1,4 @@
-export interface Message {
-  contenu: string;
-  id: string;
-}
+import { Message } from "./Message";
 
 export type Unsubscribe = () => void;
 export type Subscribe = (messages: Message[]) => void;

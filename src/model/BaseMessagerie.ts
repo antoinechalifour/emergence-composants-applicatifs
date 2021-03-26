@@ -1,4 +1,5 @@
-import { Message, Messagerie, Subscribe, Unsubscribe } from "./Model";
+import { Messagerie, Subscribe, Unsubscribe } from "./Messagerie";
+import { Message } from "./Message";
 
 export abstract class BaseMessagerie implements Messagerie {
   private _messages: Message[] = [];
