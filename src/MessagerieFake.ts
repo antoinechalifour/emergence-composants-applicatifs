@@ -1,8 +1,8 @@
+import { Message, Messagerie, Subscribe, Unsubscribe } from "./Model";
+
 /*
  * Test double en mémoire de notre module de messagerie.
  */
-import { Message, Messagerie, Subscribe, Unsubscribe } from "./Model";
-
 export class MessagerieFake implements Messagerie {
   private _messages: Message[] = [];
   private _subscribers: Subscribe[] = [];
