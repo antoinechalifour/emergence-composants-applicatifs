@@ -5,15 +5,16 @@
   "keywords": [],
   "main": "src/index.tsx",
   "dependencies": {
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-scripts": "4.0.3",
+    "ws": "^7.4.4"
+  },
+  "devDependencies": {
     "@testing-library/dom": "7.30.0",
     "@testing-library/jest-dom": "5.11.9",
     "@testing-library/react": "11.2.5",
     "@testing-library/user-event": "12.8.1",
-    "react": "17.0.1",
-    "react-dom": "17.0.1",
-    "react-scripts": "4.0.3"
-  },
-  "devDependencies": {
     "@types/react": "17.0.0",
     "@types/react-dom": "17.0.0",
     "jest-chain": "^1.1.5",
