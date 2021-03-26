@@ -13,9 +13,26 @@ class MessagerieTestImplementation implements Messagerie {
   private _subscribers: Subscribe[] = [];
   private _lastId = 1;
 
+  constructor() {
+    /*
+     * Dans un projet réel, une autre implémentation pourrait très bien recevoir des messages distants :
+     * - en ouvrant un mécanisme de polling HTTP :
+     *      setInterval(recupererMessages, temps)
+     * - en utilisant les Server-Sent Events (SSE) :
+     *      const eventSource = new EventSource('my-url')
+     *      eventSource.onmessage = ...
+     * - en ouvrant un WebSocket :
+     *      const socket = new WebSocket('my-url')
+     *      socket.addEventListener('message', ...)
+     * - en ouvrant une connexion Peer-to-peer :
+     *      rtcDataChannel.addEventListener('message', ...)
+     * - ...
+     */
+  }
+
   envoyerMessage(contenu: string): void {
     /*
-     * Dans un projet réel, cette implémentation pourrait très bien envoyer et recevoir les messages :
+     * Dans un projet réel, une autre implémentation pourrait très bien envoyer les messages :
      * - en HTTP :
      *      axios.post('/mon-api/messages', { ... })
      * - en Peer-to-peer :
