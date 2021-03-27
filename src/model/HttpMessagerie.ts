@@ -1,21 +1,30 @@
 import { BaseMessagerie } from "./BaseMessagerie";
 
 export class HttpMessagerie extends BaseMessagerie {
-  constructor() {
+  constructor(private _baseUrl: string) {
     super();
 
-    const eventSource = new EventSource("/api/messages-stream");
-    eventSource.addEventListener("message", (e) => this.ajouterMessage(e.data));
+    const eventSource = new EventSource(this._endpoint("/api/messages/stream"));
+    eventSource.addEventListener("message", (e) =>
+      this.ajouterMessage(JSON.parse(e.data))
+    );
   }
 
-  async envoyerMessage(contenu: string): Promise<void> {
+  envoyerMessage(contenu: string): void {
     const message = this.creerMessage(contenu);
 
-    await fetch("/api/messages", {
+    fetch(this._endpoint("/api/messages"), {
       method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
       body: JSON.stringify(message),
     });
 
     this.ajouterMessage(message);
+  }
+
+  private _endpoint(path: string) {
+    return `${this._baseUrl}${path}`;
   }
 }
