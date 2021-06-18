@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 
 import { Messagerie } from "../model/Messagerie";
 import { Message } from "../model/Message";
@@ -29,22 +29,11 @@ interface RédactionProps {
 
 interface CustomButtonProps {
   type: "button" | "submit";
-  label?: string;
-  leftIcon?: JSX.Element;
-  rightIcon?: JSX.Element;
+  content: ReactNode;
 }
 
-const CustomButton = ({
-  type,
-  label,
-  leftIcon,
-  rightIcon,
-}: CustomButtonProps) => (
-  <button type={type}>
-    {leftIcon}
-    {label}
-    {rightIcon}
-  </button>
+const CustomButton = ({ type, content }: CustomButtonProps) => (
+  <button type={type}>{content}</button>
 );
 
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
@@ -72,8 +61,11 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
 
       <CustomButton
         type="button"
-        leftIcon={<i className="fa fa-send" />}
-        label="Envoyer"
+        content={
+          <>
+            <i className="fa fa-send" /> Envoyer
+          </>
+        }
       />
     </form>
   );
