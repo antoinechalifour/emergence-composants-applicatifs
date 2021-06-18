@@ -31,12 +31,19 @@ interface CustomButtonProps {
   type: "button" | "submit";
   label?: string;
   leftIcon?: JSX.Element;
+  rightIcon?: JSX.Element;
 }
 
-const CustomButton = ({ type, label, leftIcon }: CustomButtonProps) => (
+const CustomButton = ({
+  type,
+  label,
+  leftIcon,
+  rightIcon,
+}: CustomButtonProps) => (
   <button type={type}>
-    {label}
     {leftIcon}
+    {label}
+    {rightIcon}
   </button>
 );
 
