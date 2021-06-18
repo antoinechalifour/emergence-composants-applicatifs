@@ -27,6 +27,8 @@ interface RédactionProps {
   onMessageAdded: (message: string) => void;
 }
 
+const SubmitMessageButton = () => <button type="submit">Envoyer</button>;
+
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   const [inputValue, setInputvalue] = useState("");
 
@@ -50,7 +52,7 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
       />
       <label htmlFor="votre-message">Votre message</label>
 
-      <button type="submit">Envoyer</button>
+      <SubmitMessageButton />
     </form>
   );
 };
