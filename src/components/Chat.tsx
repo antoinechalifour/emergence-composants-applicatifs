@@ -29,11 +29,15 @@ interface RédactionProps {
 
 interface CustomButtonProps {
   type: "button" | "submit";
-  label: string;
+  label?: string;
+  leftIcon?: JSX.Element;
 }
 
-const CustomButton = ({ type, label }: CustomButtonProps) => (
-  <button type={type}>{label}</button>
+const CustomButton = ({ type, label, leftIcon }: CustomButtonProps) => (
+  <button type={type}>
+    {label}
+    {leftIcon}
+  </button>
 );
 
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
@@ -59,7 +63,11 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
       />
       <label htmlFor="votre-message">Votre message</label>
 
-      <CustomButton type="button" label="Envoyer" />
+      <CustomButton
+        type="button"
+        leftIcon={<i className="fa fa-send" />}
+        label="Envoyer"
+      />
     </form>
   );
 };
