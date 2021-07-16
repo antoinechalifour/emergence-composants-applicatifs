@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useState } from "react";
 
 import { Messagerie } from "../model/Messagerie";
 import { Message } from "../model/Message";
+import { Send } from "express";
 
 /*
 Composant <Conversation /> qui affiche la liste des messages envoyés
@@ -36,6 +37,16 @@ const CustomButton = ({ type, children }: CustomButtonProps) => (
   <button type={type}>{children}</button>
 );
 
+interface SendButtonProps {
+  label: string;
+}
+
+const SendButton = ({ label }: SendButtonProps) => (
+  <CustomButton type="submit">
+    <i className="fa fa-send" /> {label}
+  </CustomButton>
+);
+
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   const [inputValue, setInputvalue] = useState("");
 
@@ -59,9 +70,7 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
       />
       <label htmlFor="votre-message">Votre message</label>
 
-      <CustomButton type="button">
-        <i className="fa fa-send" /> Envoyer
-      </CustomButton>
+      <SendButton label="Envoyer" />
     </form>
   );
 };
