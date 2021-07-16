@@ -1,8 +1,8 @@
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { Messagerie } from "../model/Messagerie";
 import { Message } from "../model/Message";
-import { Send } from "express";
+import { CustomButton } from "./CustomButton";
 
 /*
 Composant <Conversation /> qui affiche la liste des messages envoyés
@@ -27,15 +27,6 @@ Composant <Rédaction /> qui permet la saisie de nouveaux messages
 interface RédactionProps {
   onMessageAdded: (message: string) => void;
 }
-
-interface CustomButtonProps {
-  type: "button" | "submit";
-  children: ReactNode;
-}
-
-const CustomButton = ({ type, children }: CustomButtonProps) => (
-  <button type={type}>{children}</button>
-);
 
 interface SendButtonProps {
   label: string;
