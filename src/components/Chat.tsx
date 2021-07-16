@@ -29,11 +29,11 @@ interface RédactionProps {
 
 interface CustomButtonProps {
   type: "button" | "submit";
-  content: ReactNode;
+  children: ReactNode;
 }
 
-const CustomButton = ({ type, content }: CustomButtonProps) => (
-  <button type={type}>{content}</button>
+const CustomButton = ({ type, children }: CustomButtonProps) => (
+  <button type={type}>{children}</button>
 );
 
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
@@ -59,14 +59,9 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
       />
       <label htmlFor="votre-message">Votre message</label>
 
-      <CustomButton
-        type="button"
-        content={
-          <>
-            <i className="fa fa-send" /> Envoyer
-          </>
-        }
-      />
+      <CustomButton type="button">
+        <i className="fa fa-send" /> Envoyer
+      </CustomButton>
     </form>
   );
 };
