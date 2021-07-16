@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Messagerie } from "../model/Messagerie";
 import { Message } from "../model/Message";
 import { CustomButton } from "./CustomButton";
+import { CustomInput } from "./CustomInput";
 
 /*
 Composant <Conversation /> qui affiche la liste des messages envoyés
@@ -38,6 +39,24 @@ const SendButton = ({ label }: SendButtonProps) => (
   </CustomButton>
 );
 
+interface NewMessageInputProps {
+  value: string;
+  onChange: (newValue: string) => void;
+}
+
+const NewMessageInput = ({ value, onChange }: NewMessageInputProps) => (
+  <CustomInput
+    label="Votre message"
+    name="votre-message"
+    value={value}
+    onChange={onChange}
+    inputProps={{
+      required: true,
+      minLength: 1,
+    }}
+  />
+);
+
 const Rédaction = ({ onMessageAdded }: RédactionProps) => {
   const [inputValue, setInputvalue] = useState("");
 
@@ -50,17 +69,7 @@ const Rédaction = ({ onMessageAdded }: RédactionProps) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input
-        id="votre-message"
-        name="votre-message"
-        type="text"
-        required
-        minLength={1}
-        value={inputValue}
-        onChange={(e) => setInputvalue(e.target.value)}
-      />
-      <label htmlFor="votre-message">Votre message</label>
-
+      <NewMessageInput value={inputValue} onChange={setInputvalue} />
       <SendButton label="Envoyer" />
     </form>
   );
